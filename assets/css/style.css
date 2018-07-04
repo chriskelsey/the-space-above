@@ -29,7 +29,13 @@ body {
 form {
     width: 100%;
 }
+.form-control {
+    opacity: 0.7;
+}
 
+.btn {
+    padding: 0px 30px 0px 30px;
+}
 
 
 
