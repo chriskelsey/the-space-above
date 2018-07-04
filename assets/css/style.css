@@ -1,0 +1,19 @@
+.mid-height {
+    min-height: 800px;
+}
+
+body {
+    background-color: lightgray;
+    
+    /* background-image: url(https://api.nasa.gov/images/apod.jpg);
+    background-repeat: no-repeat; */
+}
+
+.valign {
+    display: flex;
+    align-items: center;
+}
+
+form {
+    width: 100%;
+}
