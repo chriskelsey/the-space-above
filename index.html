@@ -13,22 +13,32 @@
 
 <body>
 
-    <div class="container">
 
-        <div class="row mainBody">
-            <div class="col-lg-10 mx-auto mid-height valign">
-                <form>
-                    <h2>
-                        Discover The Space Above.
-                    </h2><br>
-                    <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="ie.123 Main Street, SomeState, USA" aria-label="ie.123 Main Street, SomeState, USA" aria-describedby="location">
-                            <div class="input-group-append">
-                              <button class="btn btn-primary" type="button">Go!</button>
+
+        <div class="container">
+
+            <div class="row mainBody">
+                <div class="col-lg-10 mx-auto mid-height valign">
+                    <form>
+                        <h2>
+                            Discover The Space Above.
+                        </h2>
+                        <br>
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                <button type="button" class="btn btn-primary" id="geoLoco">Use My Location</button>
                             </div>
-                          </div>
-                    
-                </form>
+                            <input type="text" class="form-control" placeholder=" or enter an address ie.123 Main Street, SomeState, USA" aria-label="ie.123 Main Street, SomeState, USA"
+                                aria-describedby="location">
+                            <div class="input-group-append">
+                                
+                                <button class="btn btn-primary" type="button">Go!</button>
+                                
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
             </div>
         </div>
     </div>
