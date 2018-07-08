@@ -11,3 +11,23 @@ console.log(queryUrl);
 	url:queryUrl,
 	method: 'GET'
 });*/
+
+
+
+
+
+
+function getLocation(){
+	if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(showPosition)
+	} else {
+		alert('Geolocation is not supported by this browser');
+	}
+}
+
+function showPosition(position){
+	var latitude = position.coords.latitude;
+	var longitute = position.coords.longitude;
+
+	//Do something with lat and long here.
+}
