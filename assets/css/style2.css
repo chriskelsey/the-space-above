@@ -1,0 +1,55 @@
+.card-deck {
+    border: 2px solid black;
+    background-color: black;
+    padding: 25px 10px 25px 10px;
+}
+
+.searchmatch, h3, h1, {
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    
+}
+.card-title {
+    font-family: 'Fira Sans Condensed', sans-serif;
+    text-align: center;
+    font-weight: 900;
+
+}
+
+
+td {
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-size: 16px;
+    
+    
+
+}
+.snippet {
+    font-family: 'Fira Sans Condensed', sans-serif;
+    line-height: 30px;
+}
+.jumbotron {
+    
+    margin-top: 40px;
+    margin-bottom: 0;
+    background-image: url(https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/potw1823a.jpg); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+h1 {
+    opacity: .4;
+}
+.row {
+
+    margin-top: 0;
+}
+.table td, .table th {
+    border-top: none;
+    text-align: center;
+}
+.containerJumbo {
+    margin-left: 75px;
+    width: 100%
+}
