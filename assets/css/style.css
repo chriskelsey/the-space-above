@@ -10,9 +10,9 @@ h2 {
 body {
   
     background-color: black;
-    /* background: url(https://apod.nasa.gov/apod/image/1806/IMG_5938Mauduit_2048.jpg) no-repeat center center fixed; */
-    background: url(https://api.nasa.gov/images/apod.jpg) no-repeat center center fixed;
-    /* background: url(https://apod.nasa.gov/apod/image/1807/5D4_4276_crs15launch2048.jpg) no-repeat center center fixed; */
+    background: url(https://apod.nasa.gov/apod/image/1806/IMG_5938Mauduit_2048.jpg) no-repeat center center fixed; 
+    /* background: url(https://api.nasa.gov/images/apod.jpg) no-repeat center center fixed; */
+    /* background: url(https://apod.nasa.gov/apod/image/1807/5D4_4276_crs15launch2048.jpg) no-repeat center center fixed;  */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
