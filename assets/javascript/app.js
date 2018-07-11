@@ -66,34 +66,51 @@ var subject = "pizza";
 var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=3&format=json&exintro=&titles=" + subject;
 var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=200"
 
-//for the blurb
+var wikiData = [];
+var wiki = {
+	"blurb": "",
+	"image": "",
+}
 
-$.ajax({
-	url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
-	method: "GET",
-	"crossDomain": true,
-	"async": true
-}).then(function(response) {
-	$.each(response.query.pages,
-	function(index, value) {
-		var blurb = value.extract;
-		console.log(blurb);
-	});
-})
+function GetImage() {
+	$.ajax({
+		url: "https://safe-headland-27088.herokuapp.com/" + queryURLImage,
+		method: "GET",
+		"crossDomain": true,
+		"async": true
+	}).then(function(response) {
+		$.each(response.query.pages,
+		function(index, value) {
+			wiki.image = value.thumbnail.source;
+			console.log(wiki.image);
+		});
+	})
 
-//for the image
+}
 
-$.ajax({
-	url: "https://safe-headland-27088.herokuapp.com/" + queryURLImage,
-	method: "GET",
-	"crossDomain": true,
-	"async": true
-}).then(function(response) {
-	$.each(response.query.pages,
-	function(index, value) {
-		var imageURL = value.thumbnail.source;
-		console.log(imageURL);
-	});
+function GetStarData(arr) {
+	GetImage(arr);
+	GetBlurb(arr);
+	wikiData.push(wiki);
+}
+
+function GetBlurb () {
+	$.ajax({
+		url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
+		method: "GET",
+		"crossDomain": true,
+		"async": true
+	}).then(function(response) {
+		$.each(response.query.pages,
+		function(index, value) {
+			wiki.blurb = value.extract;
+			console.log(wiki.blurb);
+		});
+	})
+}
+
+$(document).on("click", "#test1", function () {
+	GetStarData();
 })
 
 //content change
@@ -106,3 +123,5 @@ $(document).on("click", "#go", function() {
 	$("#content").empty();
 	
 })
+
+
