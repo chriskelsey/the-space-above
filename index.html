@@ -21,18 +21,22 @@
             <div class="row mainBody">
                 <div class="col-lg-10 mx-auto mid-height valign">
                     <form>
+                        <div id = "header">
                         <h2>
                             Discover The Space Above.
                         </h2>
+                        </div>
                         <br>
-                        <div class="input-group mb-3">
+                        <div id = "content" class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                <button type="button" class="btn btn-primary" id="geoLoco" onclick="getLocation()">Use My Location</button>
+                                <button id ="curLocation" type="button" class="btn btn-primary" id="geoLoco" onclick="getLocation()">Use My Location</button>
                             </div>
                             <input id="locationInput" type="text" class="form-control" placeholder=" or enter an address ie.123 Main Street, SomeState, USA" aria-label="ie.123 Main Street, SomeState, USA"
                                 aria-describedby="location">
                           
-                            <div class="input-group-append">                                
+                            <div class="input-group-append">   
+                                
+                                <button id = "go" class="btn btn-primary" type="button">Go!</button>    
 
                             </div>
                         </div>
