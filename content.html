@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>The Space Above contentPage</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style2.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed" rel="stylesheet">
+</head>
+<!-- The D3 graphics go here -->
+
+<body>
+    <div class="container placeholderLg col-lg-10 mt-5" id="d3Stuff">
+
+        <div class="placeholder" style="background-color: white">
+            <p>this is where the D3 stuff goes</p>
+        </div>
+
+
+
+        <!-- The Technical Information from Astropical  -->
+        <div class="containerJumbo">
+            <div class="jumbotron col-lg-12" style="background-color: tr; color: white">
+                <h1 class="text-center">Technical Information</h1>
+            </div>
+            <div class="row">
+
+                <table class="table table-hover col-md-12" id="techTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Designation</th>
+                            <th>Constellation</th>
+                            <th>mag</th>
+                            <th>dist</th>
+                            <th>spk</th>
+                            <th>bvc</th>
+                            <th>teff(temp)</th>
+                            <th>mass</th>
+                            <th>radius</th>
+                            <th>ra</th>
+                            <th>de</th>
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="idNum">7</td>
+                            <td id="name">GJ 244 A</td>
+                            <td id="desig">Sirius A</td>
+                            <td id="con">Canis Major</td>
+                            <td id="mag">-1.4</td>
+                            <td id="dist">8.58244</td>
+                            <td id="spk">A1.0</td>
+                            <td id="bvc">0.01</td>
+                            <td id="teff">9940</td>
+                            <td id="mass">2.02</td>
+                            <td id="radius">1.711</td>
+                            <td id="ra">6.75246</td>
+                            <td id="de">-16.71610</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- The flyout card -->
+    <div class="container" id="flyOut">
+        <div class="card-deck mt-5 col-md-5">
+            <div class="card">
+                <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Saturn_false_color_Voyager-1.jpg" alt="Picture of Saturn">
+                <div class="card-body">
+                    <h5 class="card-title title">Saturn</h5>
+                    <p class="card-text snippet">
+                        <span class="searchmatch">Saturn</span> is the sixth planet from the Sun and the second-largest in the Solar System, after
+                        Jupiter. It is a gas giant with an average radius about nine times that of Earth. It has only one-eighth
+                        the average density of Earth, but with its larger volume Saturn is over 95 times more massive. Saturn
+                        is named after the Roman god of agriculture; its astronomical symbol (♄) represents the god's sickle.</p>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>
+
+
+<!-- Add each planet's data into the table
+$("#techTable > tbody").append("<tr><td>" + name + "</td><td>" + desig + "</td><td>" + con  + "</td><td>" + mag + "</td><td>" + dist + "</td><td>" + spk + "</td><td>" + bvc + "</td><td>" + teff + "</td><td>" + mass + "</td><td>" + radius + "</td><td>" + ra + "</td><td>" + de + "</td><td>");
+}, function(errorObject){
+
+ console.log("Errors handled: " + errorObject.code);
+}); -->
