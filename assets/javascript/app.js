@@ -60,3 +60,49 @@ function GoogleGeocoding() {
 	});
 }
 
+//Wikipedia Integration
+
+var subject = "pizza";
+var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=3&format=json&exintro=&titles=" + subject;
+var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=200"
+
+//for the blurb
+
+$.ajax({
+	url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
+	method: "GET",
+	"crossDomain": true,
+	"async": true
+}).then(function(response) {
+	$.each(response.query.pages,
+	function(index, value) {
+		var blurb = value.extract;
+		console.log(blurb);
+	});
+})
+
+//for the image
+
+$.ajax({
+	url: "https://safe-headland-27088.herokuapp.com/" + queryURLImage,
+	method: "GET",
+	"crossDomain": true,
+	"async": true
+}).then(function(response) {
+	$.each(response.query.pages,
+	function(index, value) {
+		var imageURL = value.thumbnail.source;
+		console.log(imageURL);
+	});
+})
+
+//content change
+$(document).on("click", "#go", function() {
+	var location = $("#locationInput").val().trim();
+
+	console.log(location);
+
+	$("#header").empty();
+	$("#content").empty();
+	
+})
