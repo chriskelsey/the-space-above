@@ -12,17 +12,6 @@ function calcRa(long){
 	return (long+360)/15
 }
 
-//Join star and planet arrays
-function getSkies(lat,long) {
-	getStars(lat,long);
-	getPlanets(lat,long);
-
-	for (var i = 0; i < planetObj.length; i++) {
-		starObj.push(planetObj[i]);
-	}
-	console.log(starObj);
-}
-
 function getStars(lat,long){
 	//Pass Star Parameters
 	queryStarUrl += $.param({
@@ -95,13 +84,15 @@ function getPlanets(lat,long){
 				});
 			}
 		}
+
+		skyObj = Object.assign(starObj,planetObj);
+		console.log(skyObj[0].name);
 	});
 }
 
 function getLocation(){
 	if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(showPosition);
-		console.log('Here');
 	} else {
 		alert('Geolocation is not supported by this browser');
 	}
@@ -111,8 +102,8 @@ function showPosition(position){
 	var latitude = position.coords.latitude;
 	var longitude = position.coords.longitude;
 
-	getSkies(latitude,longitude);
-
+	getStars(latitude,longitude);
+	getPlanets(latitude,longitude);
 }
 
 
@@ -132,7 +123,8 @@ function GoogleGeocoding() {
 			var lat = location.lat;
 			var long = location.lng;
 			
-			// Do Something With Lat & Long here.
+			getStars(lat,long);
+			getPlanets(lat,long);
 		} else {
 			// Errors to be returned to client side if query doesn't return results.
 			console.log(address + ' is not a valid location');
