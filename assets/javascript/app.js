@@ -2,20 +2,33 @@
 queryStarUrl = 'http://www.astropical.space/astrodb/api.php?';
 queryPlanetUrl = 'http://www.astropical.space/astrodb/api-ephem.php?';
 
-queryStarUrl += $.param({
-	'table':'stars',
-	'format':'json'
-});
+var skyObj = [];
+var starObj = [];
+var planetObj = [];
 
-astroResp = [];
 
-starObj = {};
-
+//Function to calculate Right Ascension based on Longitude
 function calcRa(long){
 	return (long+360)/15
 }
 
-function getSkies(lat,long){
+//Join star and planet arrays
+function getSkies(lat,long) {
+	getStars(lat,long);
+	getPlanets(lat,long);
+
+	for (var i = 0; i < planetObj.length; i++) {
+		starObj.push(planetObj[i]);
+	}
+	console.log(starObj);
+}
+
+function getStars(lat,long){
+	//Pass Star Parameters
+	queryStarUrl += $.param({
+		'table':'stars',
+		'format':'json'
+	});
 	$.ajax({
 		url:queryStarUrl,
 		method: 'GET'
@@ -23,27 +36,65 @@ function getSkies(lat,long){
 		var jsonVar = $.parseJSON(response);
 		var stars = jsonVar.hipstars;
 		var ra = calcRa(long);
-		//establish positive or negative values
-		var posLat = lat >= 0 ? 1 : -1;
+
 		for (var i = 0; i < stars.length; i++) {
 			if((stars[i].de >lat-30 && stars[i].de < lat+30) && (stars[i].ra < ra + 20 && stars[i].ra > ra - 20)){
-				starObj.bvc = stars[i].bvc;
-				starObj.con = stars[i].con;
-				starObj.dist = stars[i].dist;
-				starObj.hip = stars[i].hip;
-				starObj.id = i;
-				starObj.mag = stars[i].mag;
-				starObj.mass = stars[i].mass;
-				starObj.name = stars[i].name;
-				starObj.ra = stars[i].ra;
-				starObj.rad = stars[i].rad;
-				starObj.radius = stars[i].radius;
-				starObj.spk = stars[i].spk;
-				starObj.teff = stars[i].teff;
-				astroResp.push(starObj);
+				starObj.push({
+					bvc : stars[i].bvc,
+					con : stars[i].con,
+					dist : stars[i].dist,
+					de : stars[i].de,
+					hip : stars[i].hip,
+					id : i,
+					mag : stars[i].mag,
+					mass : stars[i].mass,
+					name : stars[i].name,
+					ra : stars[i].ra,
+					rad : stars[i].rad,
+					radius : stars[i].radius,
+					spk : stars[i].spk,
+					teff : stars[i].teff
+				});
 			}
 		}
-		console.log(astroResp);
+	});
+}
+
+function getPlanets(lat,long){
+	//Pass Planet Parameters
+	queryPlanetUrl += $.param({
+		'lat':lat,
+		'long':long
+	});
+
+	$.ajax({
+		url:queryPlanetUrl,
+		method: 'GET'
+	}).then(function(response){
+		var jsonVar = $.parseJSON(response);
+		var planets = jsonVar.response;
+		var ra = calcRa(long);
+
+		for (var i = 0; i < planets.length; i++) {
+			if((planets[i].de >lat-30 && planets[i].de < lat+30) && (planets[i].ra < ra + 20 && planets[i].ra > ra - 20)){
+				planetObj.push({
+					bvc : planets[i].bvc,
+					con : planets[i].const,
+					dist : planets[i].au_sun,
+					de : planets[i].de,
+					hip : planets[i].hip,
+					id : i,
+					mag : planets[i].mag,
+					mass : planets[i].mass,
+					name : planets[i].name,
+					ra : planets[i].ra,
+					rad : planets[i].rad,
+					radius : planets[i].radius,
+					spk : planets[i].spk,
+					teff : planets[i].teff
+				});
+			}
+		}
 	});
 }
 
@@ -61,6 +112,7 @@ function showPosition(position){
 	var longitude = position.coords.longitude;
 
 	getSkies(latitude,longitude);
+
 }
 
 
