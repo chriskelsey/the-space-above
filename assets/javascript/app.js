@@ -1,27 +1,56 @@
-queryUrl = 'http://www.astropical.space/astrodb/api.php?';
+//API Urls
+queryStarUrl = 'http://www.astropical.space/astrodb/api.php?';
+queryPlanetUrl = 'http://www.astropical.space/astrodb/api-ephem.php?';
 
-queryUrl += $.param({
+queryStarUrl += $.param({
 	'table':'stars',
 	'format':'json'
 });
 
-$.ajax({
-	url:queryUrl,
-	method: 'GET'
-}).then(function(response){
-	var jsonVar = $.parseJSON(response);
-	var stars = jsonVar.hipstars
-	for (var i = 0; i < stars.length; i++) {
-		//for now 37 is latitude
-		if(stars[i].de >37-30 && stars[i].de < 37+30){
-			document.write(stars[i]);
+astroResp = [];
+
+starObj = {};
+
+function calcRa(long){
+	return (long+360)/15
+}
+
+function getSkies(lat,long){
+	$.ajax({
+		url:queryStarUrl,
+		method: 'GET'
+	}).then(function(response){
+		var jsonVar = $.parseJSON(response);
+		var stars = jsonVar.hipstars;
+		var ra = calcRa(long);
+		//establish positive or negative values
+		var posLat = lat >= 0 ? 1 : -1;
+		for (var i = 0; i < stars.length; i++) {
+			if((stars[i].de >lat-30 && stars[i].de < lat+30) && (stars[i].ra < ra + 20 && stars[i].ra > ra - 20)){
+				starObj.bvc = stars[i].bvc;
+				starObj.con = stars[i].con;
+				starObj.dist = stars[i].dist;
+				starObj.hip = stars[i].hip;
+				starObj.id = i;
+				starObj.mag = stars[i].mag;
+				starObj.mass = stars[i].mass;
+				starObj.name = stars[i].name;
+				starObj.ra = stars[i].ra;
+				starObj.rad = stars[i].rad;
+				starObj.radius = stars[i].radius;
+				starObj.spk = stars[i].spk;
+				starObj.teff = stars[i].teff;
+				astroResp.push(starObj);
+			}
 		}
-	}
-});
+		console.log(astroResp);
+	});
+}
 
 function getLocation(){
 	if(navigator.geolocation){
-		navigator.geolocation.getCurrentPosition(showPosition)
+		navigator.geolocation.getCurrentPosition(showPosition);
+		console.log('Here');
 	} else {
 		alert('Geolocation is not supported by this browser');
 	}
@@ -29,9 +58,9 @@ function getLocation(){
 
 function showPosition(position){
 	var latitude = position.coords.latitude;
-	var longitute = position.coords.longitude;
+	var longitude = position.coords.longitude;
 
-	//Do something with lat and long here.
+	getSkies(latitude,longitude);
 }
 
 
