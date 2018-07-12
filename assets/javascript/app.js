@@ -62,9 +62,7 @@ function GoogleGeocoding() {
 
 //Wikipedia Integration
 
-var subject = "pizza";
-var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=3&format=json&exintro=&titles=" + subject;
-var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=200"
+var subject;
 
 var wikiData = [];
 var wiki = {
@@ -72,46 +70,62 @@ var wiki = {
 	"image": "",
 }
 
-function GetImage() {
-	$.ajax({
-		url: "https://safe-headland-27088.herokuapp.com/" + queryURLImage,
-		method: "GET",
-		"crossDomain": true,
-		"async": true
-	}).then(function(response) {
-		$.each(response.query.pages,
-		function(index, value) {
-			wiki.image = value.thumbnail.source;
-			console.log(wiki.image);
+function getWiki () {
+
+	function getImage() {
+		var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=200"
+
+		$.ajax({
+			url: "https://safe-headland-27088.herokuapp.com/" + queryURLImage,
+			method: "GET",
+			"crossDomain": true,
+			"async": true
+		}).then(function(response) {
+			$.each(response.query.pages,
+			function(index, value) {
+				wiki.image = value.thumbnail.source;
+				console.log(wiki.image);
+				$(".card-img-top").attr("src", wiki.image);
+			});
+		})
+
+	}
+
+	function getBlurb () {
+		var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=2&format=json&exintro=&titles=" + subject;
+
+		$.ajax({
+			url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
+			method: "GET",
+			"crossDomain": true,
+			"async": true
+		}).then(function(response) {
+			$.each(response.query.pages,
+			function(index, value) {
+				wiki.blurb = value.extract;
+				console.log(wiki.blurb);
+				$(".card-title").empty()
+				$(".card-title").append(subject);
+				$(".searchmatch").empty();
+				$(".searchmatch").append(wiki.blurb);
+			});
 		});
-	})
+	};
 
-}
+	getImage();
+	getBlurb();
 
-function GetStarData(arr) {
-	GetImage(arr);
-	GetBlurb(arr);
+};
+
+function getStarData(arr) {
+	getWiki();
 	wikiData.push(wiki);
-}
+};
 
-function GetBlurb () {
-	$.ajax({
-		url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
-		method: "GET",
-		"crossDomain": true,
-		"async": true
-	}).then(function(response) {
-		$.each(response.query.pages,
-		function(index, value) {
-			wiki.blurb = value.extract;
-			console.log(wiki.blurb);
-		});
-	})
-}
-
-$(document).on("click", "#test1", function () {
-	GetStarData();
-})
+$(document).on("click", ".test", function () {
+	subject = $(this).attr("data-name");
+	getStarData();
+});
 
 //content change
 $(document).on("click", "#go", function() {
@@ -120,8 +134,12 @@ $(document).on("click", "#go", function() {
 	console.log(location);
 
 	$("#header").empty();
-	$("#content").empty();
+	$("#content").animate({
+		top: "-=375px",
+	}, duration = 500);
 	
 })
+
+
 
 
