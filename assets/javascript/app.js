@@ -205,7 +205,7 @@ $(document).on("click", ".test", function () {
 	getStarData();
 });
 
-//content change
+//content change --- this seems to be a duplicate of below code
 // $(document).on("click", "#go", function() {
 // 	var location = $("#locationInput").val().trim();
 
