@@ -205,18 +205,18 @@ $(document).on("click", ".test", function () {
 	getStarData();
 });
 
-//content change
-$(document).on("click", "#go", function() {
-	var location = $("#locationInput").val().trim();
+//content change --- this seems to be a duplicate of below code
+// $(document).on("click", "#go", function() {
+// 	var location = $("#locationInput").val().trim();
 
-	console.log(location);
+// 	console.log(location);
 
-	$("#header").empty();
-	$("#content").animate({
-		top: "-=375px",
-	}, duration = 500);
+// 	$("#header").empty();
+// 	$("#content").animate({
+// 		top: "-=375px",
+// 	}, duration = 500);
 	
-})
+// })
 
 $(document).ready(function() {
 	$('.test').on('click', function (e) {
@@ -248,16 +248,18 @@ $(document).on("click", "#go", function() {
 	console.log(location);
 
 	$("#header").empty();
-	$(".mainBody").animate({
-		
-  }, duration = 500);
+	$("#content").animate({
+		top: "-=375px",
+	}, duration = 500);
 	
 	
 	document.body.style.background = "";
 
-//   $("#container1").css({"position": "fixed"});
+  $(".mainBody").css({"height": "0", "padding" : "30px"});
 	
 	$("body").css({"background": "black"});
+	//$("#container1").empty();
+	
 	d3Container.fadeIn("slow");
 	theJumbo.fadeIn("slow");
 	
