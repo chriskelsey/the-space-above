@@ -206,17 +206,17 @@ $(document).on("click", ".test", function () {
 });
 
 //content change
-$(document).on("click", "#go", function() {
-	var location = $("#locationInput").val().trim();
+// $(document).on("click", "#go", function() {
+// 	var location = $("#locationInput").val().trim();
 
-	console.log(location);
+// 	console.log(location);
 
-	$("#header").empty();
-	$("#content").animate({
-		top: "-=375px",
-	}, duration = 500);
+// 	$("#header").empty();
+// 	$("#content").animate({
+// 		top: "-=375px",
+// 	}, duration = 500);
 	
-})
+// })
 
 $(document).ready(function() {
 	$('.test').on('click', function (e) {
@@ -247,10 +247,10 @@ $(document).on("click", "#go", function() {
 
 	console.log(location);
 
-	$("#header").hide();
-	$(".mainBody").animate({
-		
-  }, duration = 500);
+	$("#header").empty();
+	$("#content").animate({
+		top: "-=375px",
+	}, duration = 500);
 	
 	
 	document.body.style.background = "";
