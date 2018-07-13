@@ -249,16 +249,14 @@ $(document).on("click", "#go", function() {
 
 	$("#header").empty();
 	$(".mainBody").animate({
-		top: "-=400px",
+		
   }, duration = 500);
-  $("#content2").animate({
-		top: "-=500px",
-	}, duration = 500);
 	
-	//  $("#content").attr("class", "fixed");
+	
 	document.body.style.background = "";
 
-	// $("div.row.mainBody").remove();
+//   $("#container1").css({"position": "fixed"});
+	
 	$("body").css({"background": "black"});
 	d3Container.fadeIn("slow");
 	theJumbo.fadeIn("slow");
