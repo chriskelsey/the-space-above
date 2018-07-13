@@ -73,7 +73,7 @@ var wiki = {
 function getWiki () {
 
 	function getImage() {
-		var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=200"
+		var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=300"
 
 		$.ajax({
 			url: "https://safe-headland-27088.herokuapp.com/" + queryURLImage,
@@ -92,7 +92,7 @@ function getWiki () {
 	}
 
 	function getBlurb () {
-		var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=2&format=json&exintro=&titles=" + subject;
+		var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=1&format=json&exintro=&titles=" + subject;
 
 		$.ajax({
 			url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
@@ -139,6 +139,12 @@ $(document).on("click", "#go", function() {
 	}, duration = 500);
 	
 })
+
+$(document).ready(function() {
+	$('.test').on('click', function (e) {
+		$('#flyOut').offset({top: e.pageY + 50, left: e.pageX}).fadeIn();
+	});
+});
 
 
 
