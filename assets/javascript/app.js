@@ -1,6 +1,6 @@
 //API Urls
-queryStarUrl = 'http://www.astropical.space/astrodb/api.php?';
-queryPlanetUrl = 'http://www.astropical.space/astrodb/api-ephem.php?';
+queryStarUrl = 'https://www.astropical.space/astrodb/api.php?';
+queryPlanetUrl = 'https://www.astropical.space/astrodb/api-ephem.php?';
 
 var skyObj = [];
 var starObj = [];
