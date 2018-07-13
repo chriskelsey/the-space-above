@@ -89,6 +89,11 @@ function getPlanets(lat,long){
 		skyObj = Object.assign(starObj,planetObj);
 		for (var el in skyObj) {
 			console.log (skyObj[el].name);
+			var a = $("<button>");
+			a.addClass ("test");
+			a.attr("data-name", skyObj[el].name);
+			a.text(skyObj[el].name);
+			$(".placeholder").append(a);
 		}
 	});
 }
