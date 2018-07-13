@@ -44,7 +44,7 @@ form {
 .fixed {
   z-index: 2;
   position: fixed;
-  top: 0px; 
+  top: -20px; 
 }
 .mainBody {
   height: 165px;
@@ -55,6 +55,6 @@ form {
   background: none;
   background-color: black;
 }
-#content2 {
-  /* margin-top: 50px; */
-}
+/* #content2 {
+  margin-top: 50px;
+} */

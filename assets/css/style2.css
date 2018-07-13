@@ -60,10 +60,10 @@ td {
     height: 800px;
 }
 body {
-    /* background-image: url(https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/california_vir_2018182_lrg.jpg);  */
+    
     background-color: black;
     background-size: cover;
-    background-repeat: no-repeat;
+   
 }
 
 #flyOut {

@@ -247,7 +247,7 @@ $(document).on("click", "#go", function() {
 
 	console.log(location);
 
-	$("#header").empty();
+	$("#header").hide();
 	$(".mainBody").animate({
 		
   }, duration = 500);
@@ -255,9 +255,11 @@ $(document).on("click", "#go", function() {
 	
 	document.body.style.background = "";
 
-//   $("#container1").css({"position": "fixed"});
+  $(".mainBody").css({"height": "0", "padding" : "30px"});
 	
 	$("body").css({"background": "black"});
+	//$("#container1").empty();
+	
 	d3Container.fadeIn("slow");
 	theJumbo.fadeIn("slow");
 	
