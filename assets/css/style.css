@@ -1,42 +1,60 @@
-.mid-height {
-    height: 800px;
-}
+/* .mid-height {
+  height: 210px;
+  position: relative;
+  top: 400px;
+
+} */
 h2 {
-    font-family: 'Fira Sans Condensed', sans-serif;
-    font-size: 85px;
-    color: white;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 85px;
+  color: white;
 }
 
 body {
+
+  background-color: black;
+  background: url(https://apod.nasa.gov/apod/image/1806/IMG_5938Mauduit_2048.jpg) no-repeat center center fixed; 
   
-    background-color: black;
-    background: url(https://apod.nasa.gov/apod/image/1806/IMG_5938Mauduit_2048.jpg) no-repeat center center fixed; 
-    /* background: url(https://api.nasa.gov/images/apod.jpg) no-repeat center center fixed; */
-    /* background: url(https://apod.nasa.gov/apod/image/1807/5D4_4276_crs15launch2048.jpg) no-repeat center center fixed;  */
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
 
 }
 
 
 .valign {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 form {
-    width: 100%;
+  width: 100%;
 }
 .form-control {
-    opacity: 0.7;
-    border: 5px solid white;
+  opacity: 0.7;
+  border: 5px solid white;
 }
 
 .btn {
-    padding: 0px 30px 0px 30px;
+  padding: 0px 30px 0px 30px;
 }
 
-
+.fixed {
+  z-index: 2;
+  position: fixed;
+  top: 0px; 
+}
+.mainBody {
+  height: 165px;
+  position: relative;
+  top: 400px;
+}
+.black {
+  background: none;
+  background-color: black;
+}
+#content2 {
+  /* margin-top: 50px; */
+}

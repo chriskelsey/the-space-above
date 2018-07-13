@@ -1,3 +1,4 @@
+
 //API Urls
 queryStarUrl = 'http://www.astropical.space/astrodb/api.php?';
 queryPlanetUrl = 'http://www.astropical.space/astrodb/api-ephem.php?';
@@ -224,4 +225,43 @@ $(document).ready(function() {
 });
 
 
+
+
+var theJumbo = $("#theJumbo");
+var d3Container = $("#d3Stuff");
+var flyOut = $("#flyOut");
+var body1 = $("#body1");
+var body2 = $("#body2");
+theJumbo.hide();
+d3Container.hide();
+flyOut.hide();
+body2.hide();
+
+
+
+
+
+//content change
+$(document).on("click", "#go", function() {
+	var location = $("#locationInput").val().trim();
+
+	console.log(location);
+
+	$("#header").empty();
+	$(".mainBody").animate({
+		top: "-=400px",
+  }, duration = 500);
+  $("#content2").animate({
+		top: "-=500px",
+	}, duration = 500);
+	
+	//  $("#content").attr("class", "fixed");
+	document.body.style.background = "";
+
+	// $("div.row.mainBody").remove();
+	$("body").css({"background": "black"});
+	d3Container.fadeIn("slow");
+	theJumbo.fadeIn("slow");
+	
+})
 
