@@ -46,6 +46,7 @@ function getStars(lat,long){
 				});
 			}
 		}
+
 	});
 }
 
@@ -86,7 +87,9 @@ function getPlanets(lat,long){
 		}
 
 		skyObj = Object.assign(starObj,planetObj);
-		console.log(skyObj[0].name);
+		for (el in skyObj){
+			console.log(skyObj[el].name);
+		}
 	});
 }
 
@@ -104,6 +107,7 @@ function showPosition(position){
 
 	getStars(latitude,longitude);
 	getPlanets(latitude,longitude);
+
 }
 
 
@@ -125,6 +129,7 @@ function GoogleGeocoding() {
 			
 			getStars(lat,long);
 			getPlanets(lat,long);
+
 		} else {
 			// Errors to be returned to client side if query doesn't return results.
 			console.log(address + ' is not a valid location');
@@ -134,3 +139,83 @@ function GoogleGeocoding() {
 		}		
 	});
 }
+
+//Wikipedia Integration
+
+var subject;
+
+var wikiData = [];
+var wiki = {
+	"blurb": "",
+	"image": "",
+}
+
+function getWiki () {
+
+	function getImage() {
+		var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=200"
+
+		$.ajax({
+			url: "https://safe-headland-27088.herokuapp.com/" + queryURLImage,
+			method: "GET",
+			"crossDomain": true,
+			"async": true
+		}).then(function(response) {
+			$.each(response.query.pages,
+			function(index, value) {
+				wiki.image = value.thumbnail.source;
+				console.log(wiki.image);
+				$(".card-img-top").attr("src", wiki.image);
+			});
+		})
+
+	}
+
+	function getBlurb () {
+		var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=2&format=json&exintro=&titles=" + subject;
+
+		$.ajax({
+			url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
+			method: "GET",
+			"crossDomain": true,
+			"async": true
+		}).then(function(response) {
+			$.each(response.query.pages,
+			function(index, value) {
+				wiki.blurb = value.extract;
+				console.log(wiki.blurb);
+				$(".card-title").empty()
+				$(".card-title").append(subject);
+				$(".searchmatch").empty();
+				$(".searchmatch").append(wiki.blurb);
+			});
+		});
+	};
+
+	getImage();
+	getBlurb();
+
+};
+
+function getStarData(arr) {
+	getWiki();
+	wikiData.push(wiki);
+};
+
+$(document).on("click", ".test", function () {
+	subject = $(this).attr("data-name");
+	getStarData();
+});
+
+//content change
+$(document).on("click", "#go", function() {
+	var location = $("#locationInput").val().trim();
+
+	console.log(location);
+
+	$("#header").empty();
+	$("#content").animate({
+		top: "-=375px",
+	}, duration = 500);
+	
+})
