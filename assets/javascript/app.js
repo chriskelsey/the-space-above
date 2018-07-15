@@ -1,7 +1,7 @@
 
 //API Urls
-queryStarUrl = 'http://www.astropical.space/astrodb/api.php?';
-queryPlanetUrl = 'http://www.astropical.space/astrodb/api-ephem.php?';
+queryStarUrl = 'https://www.astropical.space/astrodb/api.php?';
+queryPlanetUrl = 'https://www.astropical.space/astrodb/api-ephem.php?';
 
 var skyObj = [];
 var starObj = [];
@@ -95,6 +95,7 @@ function getPlanets(lat,long){
 			a.text(skyObj[el].name);
 			$(".placeholder").append(a);
 		}
+		getStarTable(skyObj);
 	});
 }
 
@@ -211,6 +212,20 @@ $(document).on("click", ".test", function () {
 	subject = $(this).attr("data-name");
 	getStarData();
 });
+			
+function getStarTable(obj) {
+  var htm = '<table class="table table-hover col-md-12" id="techTable">';
+  htm+= '<tr><th>Name</th><th>Const</th><th>RA [hms]</th><th>Decl [dms]</th><th>Size ["]</th><th>Mag</th>';
+  htm+= "<th>Phase [°]</th><th>Dist [AU]</th><th>Elevation [°]</th></tr>";
+  obj.forEach(function(arr) {
+      htm+= "<tr><td>"+arr['name']+"</td><td>"+arr['const']+"</td><td>"+(arr['ra_hms']) + "</td><td>";
+      htm+= arr['de_dms']+"</td><td>"+arr['size']+"</td><td>"+arr['mag']+"</td><td>"+arr['phase']+"</td>";
+      htm+= "<td>"+arr['au_earth']+"</td><td>"+arr['alt']+"</td></tr>";
+    });
+    htm+= "</table>";
+    $('#dynamicTable').html(htm);
+}
+
 
 //content change --- this seems to be a duplicate of below code
 // $(document).on("click", "#go", function() {
