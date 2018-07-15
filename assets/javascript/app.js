@@ -10,7 +10,8 @@ var planetObj = [];
 
 //Function to calculate Right Ascension based on Longitude
 function calcRa(long){
-	return (long+360)/15
+	console.log('calcRa complete');
+	return (long+360)/15;
 }
 
 function getStars(lat,long){
@@ -47,6 +48,8 @@ function getStars(lat,long){
 				});
 			}
 		}
+		console.log('getStars complete');
+		getPlanets(lat,long);
 	});
 }
 
@@ -95,6 +98,8 @@ function getPlanets(lat,long){
 			a.text(skyObj[el].name);
 			$(".placeholder").append(a);
 		}
+		console.log('getPlanets complete');
+		//console.log(skyObj);
 		getStarTable(skyObj);
 	});
 }
@@ -105,6 +110,7 @@ function getLocation(){
 	} else {
 		alert('Geolocation is not supported by this browser');
 	}
+	console.log('getLocation complete');
 }
 
 function showPosition(position){
@@ -112,7 +118,6 @@ function showPosition(position){
 	var longitude = position.coords.longitude;
 
 	getStars(latitude,longitude);
-	getPlanets(latitude,longitude);
 
 }
 
@@ -134,7 +139,7 @@ function GoogleGeocoding() {
 			var long = location.lng;
 			
 			getStars(lat,long);
-			getPlanets(lat,long);
+			//getPlanets(lat,long);
 
 		} else {
 			// Errors to be returned to client side if query doesn't return results.
@@ -267,8 +272,6 @@ body2.hide();
 $(document).on("click", "#go", function() {
 	var location = $("#locationInput").val().trim();
 
-	console.log(location);
-
 	$("#header").empty();
 	$("#content").animate({
 		top: "-=375px",
@@ -284,6 +287,7 @@ $(document).on("click", "#go", function() {
 	
 	d3Container.fadeIn("slow");
 	theJumbo.fadeIn("slow");
+	GoogleGeocoding();
 	
 })
 
