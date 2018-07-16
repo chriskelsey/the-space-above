@@ -291,13 +291,14 @@ $(document).on("click", "#go", function() {
 
   document.body.style.background = "";
 
-  $(".mainBody").css({ height: "0", padding: "30px" });
+  $(".mainBody").css({"height": "0", "padding" : "30px"});
+	
+	$("body").css({"background": "black"});
+	//$("#container1").empty();
+	
+	d3Container.fadeIn("slow");
+	theJumbo.fadeIn("slow");
+	flyOut.fadeIn("slow");
 
-  $("body").css({ background: "black" });
-
-  d3Container.fadeIn("slow");
-
-  theJumbo.fadeIn("slow");
-  
-  flyOut.fadeIn("slow");
-});
+	
+})
