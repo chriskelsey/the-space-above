@@ -104,6 +104,7 @@ function getPlanets(lat, long) {
     getStarData(skyObj);
     getStarTable(skyObj);
   });
+
 }
 
 function getLocation() {
@@ -114,43 +115,39 @@ function getLocation() {
   }
 }
 
-function showPosition(position) {
-  var latitude = position.coords.latitude;
-  var longitude = position.coords.longitude;
+function showPosition(position){
+	var latitude = position.coords.latitude;
+	var longitude = position.coords.longitude;
 
-  getStars(latitude, longitude);
+	getStars(latitude,longitude);
 }
 
 function GoogleGeocoding() {
-  var address = $("#locationInput")
-    .val()
-    .trim();
-  var apiKey = "AIzaSyCeliRmHt2owSqzkOW55Jhoifz3B-YCuUU";
-  var queryUrl =
-    "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-    address +
-    "key=" +
-    apiKey;
+	var address = $('#locationInput').val().trim();
+	var apiKey = 'AIzaSyCeliRmHt2owSqzkOW55Jhoifz3B-YCuUU';
+	var queryUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + 'key=' + apiKey;
 
-  $.ajax({
-    url: queryUrl,
-    method: "GET"
-  }).then(function(response) {
-    var status = response.status;
-    if (status === "OK") {
-      var location = response.results[0].geometry.location;
-      var lat = location.lat;
-      var long = location.lng;
+	$.ajax({
+		url: queryUrl,
+		method:'GET'
+	}).then(function(response){
 
-      getStars(lat, long);
-    } else {
-      // Errors to be returned to client side if query doesn't return results.
-      console.log(address + " is not a valid location");
-      console.log(
-        "Please enter a valid location in '123 Main Street, SomeState, USA' or 'City, SomeState' format."
-      );
-    }
-  });
+		var status = response.status;
+		if(status === 'OK'){
+			var location = response.results[0].geometry.location;
+			var lat = location.lat;
+			var long = location.lng;
+			
+			getStars(lat,long);
+
+		} else {
+			// Errors to be returned to client side if query doesn't return results.
+			console.log(address + ' is not a valid location');
+			console.log("Please enter a valid location in '123 Main Street, SomeState, USA' or 'City, SomeState' format.");
+
+			// Do Something With Errors Here
+		}		
+	});
 }
 
 var wikiData = [];
@@ -240,32 +237,18 @@ $(document).on("click", ".test", function() {
 });
 
 function getStarTable(obj) {
-  var htm = '<table class="table table-hover col-md-12" id="techTable">';
-  htm +=
-    '<tr><th>Name</th><th>Const</th><th>RA [hms]</th><th>Decl [dms]</th><th>Size ["]</th><th>Mag</th>';
-  htm += "<th>Phase [°]</th><th>Dist [AU]</th><th>Elevation [°]</th></tr>";
-  obj.forEach(function(arr) {
-    htm +=
-      "<tr><td>" +
-      arr["name"] +
-      "</td><td>" +
-      arr["const"] +
-      "</td><td>" +
-      arr["ra_hms"] +
-      "</td><td>";
-    htm +=
-      arr["de_dms"] +
-      "</td><td>" +
-      arr["size"] +
-      "</td><td>" +
-      arr["mag"] +
-      "</td><td>" +
-      arr["phase"] +
-      "</td>";
-    htm += "<td>" + arr["au_earth"] + "</td><td>" + arr["alt"] + "</td></tr>";
-  });
-  htm += "</table>";
-  $("#dynamicTable").html(htm);
+	var htm = '<table class="table table-hover col-md-12" id="techTable">';
+  	htm+= '<tr><th>Name</th><th>Constellation [Abbr.]</th><th>Distance [AU]</th><th>Right Ascension</th><th>Declination</th><th>Magnitude</th><th>Mass [<sup>*7</sup>]</th>';
+  	htm+= "<th>Radial Velocity</th><th>Radius [<sup>*7</sup>]</th><th>Spectral Type</th><th>Temperature [K]</th></tr>";
+  	obj.forEach(function(arr) {
+  		console.log(arr.value);
+  		if(arr.value == 'undefined'){console.log(arr.value)};
+    	htm+= "<tr><td>"+arr['name']+"</td><td>"+arr['con']+"</td><td>"+(arr['dist']) + "</td><td>";
+    	htm+= arr['ra']+"</td><td>"+arr['de']+"</td><td>"+arr['mag']+"</td><td>"+arr['mass']+"</td>";
+    	htm+= "<td>"+arr['rad']+"</td><td>"+arr['radius']+"</td><td>"+arr['spk']+"</td><td>"+arr['teff']+"</td></tr>";
+	});
+    htm+= "</table>";
+    $('#dynamicTable').html(htm);
 }
 
 
