@@ -9,7 +9,7 @@ var planetObj = [];
 
 //Function to calculate Right Ascension based on Longitude
 function calcRa(long){
-	return (long+360)/15
+	return (long+360)/15;
 }
 
 function getStars(lat,long){
@@ -46,6 +46,8 @@ function getStars(lat,long){
 				});
 			}
 		}
+
+		getPlanets(lat,long);
 
 	});
 }
@@ -87,9 +89,16 @@ function getPlanets(lat,long){
 		}
 
 		skyObj = Object.assign(starObj,planetObj);
-		for (el in skyObj){
-			console.log(skyObj[el].name);
+
+		for (var el in skyObj) {
+			var a = $("<button>");
+			a.addClass ("test");
+			a.attr("data-name", skyObj[el].name);
+			a.text(skyObj[el].name);
+			$(".placeholder").append(a);
 		}
+		
+		getStarTable(skyObj);
 	});
 }
 
@@ -128,7 +137,6 @@ function GoogleGeocoding() {
 			var long = location.lng;
 			
 			getStars(lat,long);
-			getPlanets(lat,long);
 
 		} else {
 			// Errors to be returned to client side if query doesn't return results.
@@ -206,6 +214,54 @@ $(document).on("click", ".test", function () {
 	subject = $(this).attr("data-name");
 	getStarData();
 });
+			
+function getStarTable(obj) {
+	var htm = '<table class="table table-hover col-md-12" id="techTable">';
+  	htm+= '<tr><th>Name</th><th>Constellation [Abbr.]</th><th>Distance [AU]</th><th>Right Ascension</th><th>Declination</th><th>Magnitude</th><th>Mass [<sup>*7</sup>]</th>';
+  	htm+= "<th>Radial Velocity</th><th>Radius [<sup>*7</sup>]</th><th>Spectral Type</th><th>Temperature [K]</th></tr>";
+  	obj.forEach(function(arr) {
+  		console.log(arr.value);
+  		if(arr.value == 'undefined'){console.log(arr.value)};
+    	htm+= "<tr><td>"+arr['name']+"</td><td>"+arr['con']+"</td><td>"+(arr['dist']) + "</td><td>";
+    	htm+= arr['ra']+"</td><td>"+arr['de']+"</td><td>"+arr['mag']+"</td><td>"+arr['mass']+"</td>";
+    	htm+= "<td>"+arr['rad']+"</td><td>"+arr['radius']+"</td><td>"+arr['spk']+"</td><td>"+arr['teff']+"</td></tr>";
+	});
+    htm+= "</table>";
+    $('#dynamicTable').html(htm);
+}
+
+
+//content change --- this seems to be a duplicate of below code
+// $(document).on("click", "#go", function() {
+// 	var location = $("#locationInput").val().trim();
+
+// 	console.log(location);
+
+// 	$("#header").empty();
+// 	$("#content").animate({
+// 		top: "-=375px",
+// 	}, duration = 500);
+	
+// })
+
+$(document).ready(function() {
+	$('.test').on('click', function (e) {
+		$('#flyOut').offset({top: e.pageY + 50, left: e.pageX}).fadeIn();
+	});
+});
+
+
+
+
+var theJumbo = $("#theJumbo");
+var d3Container = $("#d3Stuff");
+var flyOut = $("#flyOut");
+var body1 = $("#body1");
+var body2 = $("#body2");
+theJumbo.hide();
+d3Container.hide();
+flyOut.hide();
+body2.hide();
 
 //content change
 $(document).on("click", "#go", function() {
@@ -218,4 +274,15 @@ $(document).on("click", "#go", function() {
 		top: "-=375px",
 	}, duration = 500);
 	
-})
+	document.body.style.background = "";
+
+  $(".mainBody").css({"height": "0", "padding" : "30px"});
+	
+	$("body").css({"background": "black"});
+	//$("#container1").empty();
+	
+	d3Container.fadeIn("slow");
+	theJumbo.fadeIn("slow");
+	GoogleGeocoding();
+	
+});
