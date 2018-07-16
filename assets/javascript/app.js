@@ -198,6 +198,25 @@ function getWiki(subject) {
         $(".searchmatch").empty();
         $(".searchmatch").append(wiki.blurb);
       });
+      	if (wiki.blurb == "" ) {
+				$(".card-img-top").attr("src", "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg");
+				$(".card-title").empty();
+				$(".card-title").append("No Wikipedia Info");
+				$(".searchmatch").empty();
+				$(".searchmatch").append("There is no page available for this celestial body under the specified name. Maybe you should make one!");
+			  }  else if ((wiki.blurb).includes("commonly refers to")) {
+				$(".card-img-top").attr("src", "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg");
+				$(".card-title").empty();
+				$(".card-title").append("Many Occurences");
+				$(".searchmatch").empty();
+				$(".searchmatch").append("This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more.");
+			  } else if ((wiki.blurb).includes("refer to")) {
+				$(".card-img-top").attr("src", "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg");
+				$(".card-title").empty();
+				$(".card-title").append("Many Occurences");
+				$(".searchmatch").empty();
+				$(".searchmatch").append("This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more.");
+			  }
     });
   }
 
@@ -249,13 +268,17 @@ function getStarTable(obj) {
   $("#dynamicTable").html(htm);
 }
 
-$(document).ready(function() {
-  $(".test").on("click", function(e) {
-    $("#flyOut")
-      .offset({ top: e.pageY + 50, left: e.pageX })
-      .fadeIn();
-  });
-});
+
+// $(document).on('click', '.test', function (e) {
+// 	$('#flyOut').offset({top: e.pageY + 50, left: e.pageX}).fadeIn();
+// });
+
+// $(document).ready(function() {
+// 	$('.test').on('click', function (e) {
+// 		$('#flyOut').offset({top: e.pageY + 50, left: e.pageX}).fadeIn();
+// 	});
+// });
+
 
 var theJumbo = $("#theJumbo");
 var d3Container = $("#d3Stuff");
@@ -292,4 +315,6 @@ $(document).on("click", "#go", function() {
   d3Container.fadeIn("slow");
 
   theJumbo.fadeIn("slow");
+  
+  flyOut.fadeIn("slow");
 });

@@ -43,8 +43,36 @@
     <!-- <div class="bodyContainer" id="body2"> -->
     <!-- The D3 graphics go here -->
     <div class="container" id="content2">
-        <div class="container placeholderLg col-lg-12 mt-5" id="d3Stuff">
-            <div id="d3Box" class="placeholder" style="background-color: #000">
+
+        <div class="placeholderLg" id="d3Stuff">
+            <div class = "row">
+            <div class="placeholder col-lg-7 mt-5 offset-lg-1" style="background-color: white">
+                <p>this is where the D3 stuff goes</p>
+                <!-- <button class="test" data-name="taco">Click me</button>
+                <button class="test" data-name="pizza">Click me 2</button>
+                <button class="test" data-name="star">Click me 2</button>
+                <button class="test" data-name="mercury">Click me 2</button>
+                <button class="test" data-name="venus">Click me 2</button>
+                <button class="test" data-name="orion (constellation)">Click me 2</button> -->
+            </div>
+
+            <div class = "col-md-3 mt-5">
+                        <!-- The flyout card -->
+                <div id="flyOut">
+                    <div class="card-deck">
+                        <div class="card">
+                            <img class="card-img-top" src="https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg" alt="solar-pic">
+                            <div class="card-body">
+                                <h5 class="card-title title">Click on a star to start exploring!</h5>
+                                <p class="card-text snippet">
+                                    <span class="searchmatch"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             </div>
         </div>
         <!-- The Technical Information from Astropical  -->
@@ -52,62 +80,56 @@
             <div class="jumbotron col-lg-12" style="background-color: tr; color: white">
                 <h1 class="text-center">Technical Information</h1>
             </div>
-            <div class="row">
-                <table class="table table-hover col-md-12" id="techTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Designation</th>
-                            <th>Constellation</th>
-                            <th>mag</th>
-                            <th>dist</th>
-                            <th>spk</th>
-                            <th>bvc</th>
-                            <th>teff(temp)</th>
-                            <th>mass</th>
-                            <th>radius</th>
-                            <th>ra</th>
-                            <th>de</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="idNum">7</td>
-                            <td id="name">GJ 244 A</td>
-                            <td id="desig">Sirius A</td>
-                            <td id="con">Canis Major</td>
-                            <td id="mag">-1.4</td>
-                            <td id="dist">8.58244</td>
-                            <td id="spk">A1.0</td>
-                            <td id="bvc">0.01</td>
-                            <td id="teff">9940</td>
-                            <td id="mass">2.02</td>
-                            <td id="radius">1.711</td>
-                            <td id="ra">6.75246</td>
-                            <td id="de">-16.71610</td>
-                        </tr>
-                    </tbody>
-                </table>
+          
             </div>
-        </div>
-    </div>
+        
 
-    <!-- </div> -->
-    <!-- The flyout card -->
-    <div class="container" id="flyOut">
-        <div class="card-deck">
-            <div class="card">
-                <img class="card-img-top" src="#" alt="solar-pic">
-                <div class="card-body">
-                    <h5 class="card-title title"></h5>
-                    <p class="card-text snippet">
-                        <span class="searchmatch"></span>
-                    </p>
+            
+         <!-- The Technical Information from Astropical  -->
+         <div class="containerJumbo" id="theJumbo">
+                <div class="jumbotron col-lg-12" style="background-color: tr; color: white">
+                    <h1 class="text-center">Technical Information</h1>
+                </div>
+                <div class="row">
+                    <table class="table table-hover col-md-12" id="techTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Designation</th>
+                                <th>Constellation</th>
+                                <th>mag</th>
+                                <th>dist</th>
+                                <th>spk</th>
+                                <th>bvc</th>
+                                <th>teff(temp)</th>
+                                <th>mass</th>
+                                <th>radius</th>
+                                <th>ra</th>
+                                <th>de</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="idNum">7</td>
+                                <td id="name">GJ 244 A</td>
+                                <td id="desig">Sirius A</td>
+                                <td id="con">Canis Major</td>
+                                <td id="mag">-1.4</td>
+                                <td id="dist">8.58244</td>
+                                <td id="spk">A1.0</td>
+                                <td id="bvc">0.01</td>
+                                <td id="teff">9940</td>
+                                <td id="mass">2.02</td>
+                                <td id="radius">1.711</td>
+                                <td id="ra">6.75246</td>
+                                <td id="de">-16.71610</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
 
     <script src="assets/javascript/app.js"></script>
     <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?2.6.0"></script>
@@ -117,6 +139,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="assets/javascript/starsMap.js"></script>
+
 </body>
 
 </html>
