@@ -4,25 +4,26 @@
   top: 400px;
 
 } */
+
+g {
+  cursor: pointer;
+}
 h2 {
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: "Fira Sans Condensed", sans-serif;
   font-size: 85px;
   color: white;
 }
 
 body {
-
   background-color: black;
-  background: url(https://apod.nasa.gov/apod/image/1806/IMG_5938Mauduit_2048.jpg) no-repeat center center fixed; 
-  
+  background: url(https://apod.nasa.gov/apod/image/1806/IMG_5938Mauduit_2048.jpg)
+    no-repeat center center fixed;
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
-
 }
-
 
 .valign {
   display: flex;
@@ -44,7 +45,7 @@ form {
 .fixed {
   z-index: 2;
   position: fixed;
-  top: -20px; 
+  top: -20px;
 }
 .mainBody {
   height: 165px;
