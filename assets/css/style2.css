@@ -1,12 +1,12 @@
 .card-deck {
-    border: 2px solid black;
-    background-color: black;
-    padding: 25px 10px 25px 10px;
+    /* border: 1px solid black;
+    border-radius: 4px;
+    background-color: black; 
+    padding: 25px 10px 25px 10px; */
 }
 
 .searchmatch, h3, h1, {
     font-family: 'Fira Sans Condensed', sans-serif;
-    font-size: 20px;
     text-align: center;
     
 }
@@ -27,7 +27,8 @@ td {
 }
 .snippet {
     font-family: 'Fira Sans Condensed', sans-serif;
-    line-height: 30px;
+    line-height: 20px;
+    font-size: 13px;
 }
 .jumbotron {
     
@@ -59,8 +60,19 @@ td {
     height: 800px;
 }
 body {
-    /* background-image: url(https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/california_vir_2018182_lrg.jpg);  */
+    
     background-color: black;
     background-size: cover;
-    background-repeat: no-repeat;
+   
+}
+
+#flyOut {
+    position: absolute;
+    display: none;
+    z-index: 100;
+    width: 250px;
+}
+
+.card-body {
+    padding: 5px 5px 5px 5px;
 }

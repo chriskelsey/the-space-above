@@ -1,3 +1,4 @@
+
 //API Urls
 queryStarUrl = 'https://www.astropical.space/astrodb/api.php?';
 queryPlanetUrl = 'https://www.astropical.space/astrodb/api-ephem.php?';
@@ -91,13 +92,13 @@ function getPlanets(lat,long){
 		skyObj = Object.assign(starObj,planetObj);
 
 		for (var el in skyObj) {
+
 			var a = $("<button>");
 			a.addClass ("test");
 			a.attr("data-name", skyObj[el].name);
 			a.text(skyObj[el].name);
 			$(".placeholder").append(a);
 		}
-		
 		getStarTable(skyObj);
 	});
 }
@@ -108,6 +109,7 @@ function getLocation(){
 	} else {
 		alert('Geolocation is not supported by this browser');
 	}
+	console.log('getLocation complete');
 }
 
 function showPosition(position){
@@ -115,8 +117,6 @@ function showPosition(position){
 	var longitude = position.coords.longitude;
 
 	getStars(latitude,longitude);
-	getPlanets(latitude,longitude);
-
 }
 
 
@@ -161,7 +161,7 @@ var wiki = {
 function getWiki () {
 
 	function getImage() {
-		var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=200"
+		var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=300"
 
 		$.ajax({
 			url: "https://safe-headland-27088.herokuapp.com/" + queryURLImage,
@@ -180,8 +180,7 @@ function getWiki () {
 	}
 
 	function getBlurb () {
-		var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=2&format=json&exintro=&titles=" + subject;
-
+		var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=1&format=json&exintro=&titles=" + subject;
 		$.ajax({
 			url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
 			method: "GET",
@@ -266,14 +265,11 @@ body2.hide();
 //content change
 $(document).on("click", "#go", function() {
 	var location = $("#locationInput").val().trim();
-
-	console.log(location);
-
 	$("#header").empty();
 	$("#content").animate({
 		top: "-=375px",
 	}, duration = 500);
-	
+
 	document.body.style.background = "";
 
   $(".mainBody").css({"height": "0", "padding" : "30px"});
