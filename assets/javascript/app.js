@@ -10,7 +10,6 @@ var planetObj = [];
 
 //Function to calculate Right Ascension based on Longitude
 function calcRa(long){
-	console.log('calcRa complete');
 	return (long+360)/15;
 }
 
@@ -48,8 +47,9 @@ function getStars(lat,long){
 				});
 			}
 		}
-		console.log('getStars complete');
+
 		getPlanets(lat,long);
+
 	});
 }
 
@@ -90,16 +90,15 @@ function getPlanets(lat,long){
 		}
 
 		skyObj = Object.assign(starObj,planetObj);
+
 		for (var el in skyObj) {
-			console.log (skyObj[el].name);
+
 			var a = $("<button>");
 			a.addClass ("test");
 			a.attr("data-name", skyObj[el].name);
 			a.text(skyObj[el].name);
 			$(".placeholder").append(a);
 		}
-		console.log('getPlanets complete');
-		//console.log(skyObj);
 		getStarTable(skyObj);
 	});
 }
@@ -118,7 +117,6 @@ function showPosition(position){
 	var longitude = position.coords.longitude;
 
 	getStars(latitude,longitude);
-
 }
 
 
@@ -139,7 +137,6 @@ function GoogleGeocoding() {
 			var long = location.lng;
 			
 			getStars(lat,long);
-			//getPlanets(lat,long);
 
 		} else {
 			// Errors to be returned to client side if query doesn't return results.
@@ -184,7 +181,6 @@ function getWiki () {
 
 	function getBlurb () {
 		var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=1&format=json&exintro=&titles=" + subject;
-
 		$.ajax({
 			url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
 			method: "GET",
@@ -219,14 +215,16 @@ $(document).on("click", ".test", function () {
 });
 			
 function getStarTable(obj) {
-  var htm = '<table class="table table-hover col-md-12" id="techTable">';
-  htm+= '<tr><th>Name</th><th>Const</th><th>RA [hms]</th><th>Decl [dms]</th><th>Size ["]</th><th>Mag</th>';
-  htm+= "<th>Phase [°]</th><th>Dist [AU]</th><th>Elevation [°]</th></tr>";
-  obj.forEach(function(arr) {
-      htm+= "<tr><td>"+arr['name']+"</td><td>"+arr['const']+"</td><td>"+(arr['ra_hms']) + "</td><td>";
-      htm+= arr['de_dms']+"</td><td>"+arr['size']+"</td><td>"+arr['mag']+"</td><td>"+arr['phase']+"</td>";
-      htm+= "<td>"+arr['au_earth']+"</td><td>"+arr['alt']+"</td></tr>";
-    });
+	var htm = '<table class="table table-hover col-md-12" id="techTable">';
+  	htm+= '<tr><th>Name</th><th>Constellation [Abbr.]</th><th>Distance [AU]</th><th>Right Ascension</th><th>Declination</th><th>Magnitude</th><th>Mass [<sup>*7</sup>]</th>';
+  	htm+= "<th>Radial Velocity</th><th>Radius [<sup>*7</sup>]</th><th>Spectral Type</th><th>Temperature [K]</th></tr>";
+  	obj.forEach(function(arr) {
+  		console.log(arr.value);
+  		if(arr.value == 'undefined'){console.log(arr.value)};
+    	htm+= "<tr><td>"+arr['name']+"</td><td>"+arr['con']+"</td><td>"+(arr['dist']) + "</td><td>";
+    	htm+= arr['ra']+"</td><td>"+arr['de']+"</td><td>"+arr['mag']+"</td><td>"+arr['mass']+"</td>";
+    	htm+= "<td>"+arr['rad']+"</td><td>"+arr['radius']+"</td><td>"+arr['spk']+"</td><td>"+arr['teff']+"</td></tr>";
+	});
     htm+= "</table>";
     $('#dynamicTable').html(htm);
 }
@@ -264,20 +262,14 @@ d3Container.hide();
 flyOut.hide();
 body2.hide();
 
-
-
-
-
 //content change
 $(document).on("click", "#go", function() {
 	var location = $("#locationInput").val().trim();
-
 	$("#header").empty();
 	$("#content").animate({
 		top: "-=375px",
 	}, duration = 500);
-	
-	
+
 	document.body.style.background = "";
 
   $(".mainBody").css({"height": "0", "padding" : "30px"});
@@ -289,5 +281,4 @@ $(document).on("click", "#go", function() {
 	theJumbo.fadeIn("slow");
 	GoogleGeocoding();
 	
-})
-
+});
