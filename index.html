@@ -41,17 +41,41 @@
     <!-- <div class="bodyContainer" id="body2"> -->
     <!-- The D3 graphics go here -->
     <div class="container" id="content2">
-        <div class="container placeholderLg col-lg-12 mt-5" id="d3Stuff">
-            <div class="placeholder" style="background-color: white">
+        <div class="placeholderLg" id="d3Stuff">
+            <div class = "row">
+            <div class="placeholder col-lg-7 mt-5 offset-lg-1" style="background-color: white">
                 <p>this is where the D3 stuff goes</p>
-                <button class="test" data-name="taco">Click me</button>
+                <!-- <button class="test" data-name="taco">Click me</button>
                 <button class="test" data-name="pizza">Click me 2</button>
                 <button class="test" data-name="star">Click me 2</button>
                 <button class="test" data-name="mercury">Click me 2</button>
                 <button class="test" data-name="venus">Click me 2</button>
-                <button class="test" data-name="orion (constellation)">Click me 2</button>
+                <button class="test" data-name="orion (constellation)">Click me 2</button> -->
+            </div>
+
+            <div class = "col-md-3 mt-5">
+                        <!-- The flyout card -->
+                <div id="flyOut">
+                    <div class="card-deck">
+                        <div class="card">
+                            <img class="card-img-top" src="https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg" alt="solar-pic">
+                            <div class="card-body">
+                                <h5 class="card-title title">Click on a star to start exploring!</h5>
+                                <p class="card-text snippet">
+                                    <span class="searchmatch"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             </div>
             </div>
+            </div>
+        
+
+            
          <!-- The Technical Information from Astropical  -->
          <div class="containerJumbo" id="theJumbo">
                 <div class="jumbotron col-lg-12" style="background-color: tr; color: white">
@@ -99,20 +123,6 @@
         </div>
            
         <!-- </div> -->
-        <!-- The flyout card -->
-        <div class="container" id="flyOut">
-            <div class="card-deck">
-                <div class="card">
-                    <img class="card-img-top" src="#" alt="solar-pic">
-                    <div class="card-body">
-                        <h5 class="card-title title"></h5>
-                        <p class="card-text snippet">
-                            <span class="searchmatch"></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
         <script src="assets/javascript/app.js"></script>
 </body>
 </html>

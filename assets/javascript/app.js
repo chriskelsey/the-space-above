@@ -1,4 +1,3 @@
-
 //API Urls
 queryStarUrl = 'http://www.astropical.space/astrodb/api.php?';
 queryPlanetUrl = 'http://www.astropical.space/astrodb/api-ephem.php?';
@@ -158,7 +157,7 @@ var wiki = {
 function getWiki () {
 
 	function getImage() {
-		var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=300"
+		var queryURLImage = "https://en.wikipedia.org/w/api.php?action=query&titles=" + subject + "&prop=pageimages&format=json&pithumbsize=300";
 
 		$.ajax({
 			url: "https://safe-headland-27088.herokuapp.com/" + queryURLImage,
@@ -177,7 +176,7 @@ function getWiki () {
 	}
 
 	function getBlurb () {
-		var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=1&format=json&exintro=&titles=" + subject;
+		var queryURLBlurb = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=2&format=json&exintro=&titles=" + subject;
 
 		$.ajax({
 			url: "https://safe-headland-27088.herokuapp.com/" + queryURLBlurb,
@@ -189,11 +188,33 @@ function getWiki () {
 			function(index, value) {
 				wiki.blurb = value.extract;
 				console.log(wiki.blurb);
-				$(".card-title").empty()
+				$(".card-title").empty();
 				$(".card-title").append(subject);
 				$(".searchmatch").empty();
 				$(".searchmatch").append(wiki.blurb);
 			});
+
+			console.log(queryURLBlurb);
+
+			if (wiki.blurb == "" ) {
+				$(".card-img-top").attr("src", "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg");
+				$(".card-title").empty();
+				$(".card-title").append("No Wikipedia Info");
+				$(".searchmatch").empty();
+				$(".searchmatch").append("There is no page available for this celestial body under the specified name. Maybe you should make one!");
+			}  else if ((wiki.blurb).includes("commonly refers to")) {
+				$(".card-img-top").attr("src", "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg");
+				$(".card-title").empty();
+				$(".card-title").append("Many Occurences");
+				$(".searchmatch").empty();
+				$(".searchmatch").append("This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more.");
+			} else if ((wiki.blurb).includes("refer to")) {
+				$(".card-img-top").attr("src", "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg");
+				$(".card-title").empty();
+				$(".card-title").append("Many Occurences");
+				$(".searchmatch").empty();
+				$(".searchmatch").append("This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more.");
+			}
 		});
 	};
 
@@ -225,11 +246,15 @@ $(document).on("click", ".test", function () {
 	
 // })
 
-$(document).ready(function() {
-	$('.test').on('click', function (e) {
-		$('#flyOut').offset({top: e.pageY + 50, left: e.pageX}).fadeIn();
-	});
-});
+// $(document).on('click', '.test', function (e) {
+// 	$('#flyOut').offset({top: e.pageY + 50, left: e.pageX}).fadeIn();
+// });
+
+// $(document).ready(function() {
+// 	$('.test').on('click', function (e) {
+// 		$('#flyOut').offset({top: e.pageY + 50, left: e.pageX}).fadeIn();
+// 	});
+// });
 
 
 
@@ -269,6 +294,8 @@ $(document).on("click", "#go", function() {
 	
 	d3Container.fadeIn("slow");
 	theJumbo.fadeIn("slow");
+	flyOut.fadeIn("slow");
+
 	
 })
 
