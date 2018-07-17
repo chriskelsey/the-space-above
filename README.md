@@ -10,7 +10,7 @@
 ##Instructions
 
     *`Click 'Use My Location' (approve permission and wait a few seconds), or enter a location in one of the following formats and press 'Go!':
-        -City State (US)
+        -City, State (US)
         -123 Main Street, Some State, Country (Non-US)
         -123 Main Street, SomeState, USA (US)
     *`Click on the individual nodules in the graphic to view additional information about certain celestial bodies.
