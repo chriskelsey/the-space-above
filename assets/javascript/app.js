@@ -121,7 +121,8 @@ function getLocation() {
   if (navigator.geolocation) {
     showPosition(navigator.geolocation.getCurrentPosition(showPosition));
   } else {
-    alert("Geolocation is not supported by this browser");
+    $("#container1").prepend(
+      '<div class="alert alert-danger" role="alert">Please enter in an address.</div>');
   }
 }
 
@@ -313,7 +314,7 @@ $(document).on("click", "button", function() {
     starObj = [];
     planetObj = [];
     $("#d3Box").empty();
-    $("#locationInput").val("You are using your location - please approve permission and sit tight.");
+    $("#locationInput").val("You are using your location - sit tight.");
     getLocation();
   } else if ($(this).attr("id") === "go") {
     event.preventDefault();
