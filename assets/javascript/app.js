@@ -1,10 +1,27 @@
-//API Urls
-queryStarUrl = "https://www.astropical.space/astrodb/api.php?";
-queryPlanetUrl = "https://www.astropical.space/astrodb/api-ephem.php?";
+//Global Variables
 
+var buttonOn = 1;
+var theJumbo = $("#theJumbo");
+var d3Container = $("#d3Stuff");
+var flyOut = $("#flyOut");
+var body1 = $("#body1");
+var body2 = $("#body2");
+
+//Objects
 var skyObj = [];
 var starObj = [];
 var planetObj = [];
+var wikiData = [];
+
+//definitions needed for content change below
+theJumbo.hide();
+d3Container.hide();
+flyOut.hide();
+body2.hide();
+
+//API Urls
+queryStarUrl = "https://www.astropical.space/astrodb/api.php?";
+queryPlanetUrl = "https://www.astropical.space/astrodb/api-ephem.php?";
 
 //Function to calculate Right Ascension based on Longitude
 function calcRa(long) {
@@ -94,15 +111,9 @@ function getPlanets(lat, long) {
     }
 
     skyObj = Object.assign(starObj, planetObj);
-    // for (var el in skyObj) {
-    //   var a = $("<button>");
-    //   a.addClass("test");
-    //   a.attr("data-name", skyObj[el].name);
-    //   a.text(skyObj[el].name);
-    //   $(".placeholder").append(a);
-    // }
     getStarData(skyObj);
     getStarTable(skyObj);
+    loadDataInfo();
   });
 
 }
@@ -150,7 +161,6 @@ function GoogleGeocoding() {
 	});
 }
 
-var wikiData = [];
 
 function getWiki(subject) {
   var wiki = {
@@ -251,56 +261,42 @@ function getStarTable(obj) {
     $('#dynamicTable').html(htm);
 }
 
+function loadDataInfo(){
+  if (buttonOn) { 
+      $("#header").empty();
+
+      $("#content").animate({
+        top: "-=375px"
+      },(duration = 500));
+
+      document.body.style.background = "";
+
+      $(".mainBody").css({
+        "height": "0",
+        "padding": "30px"
+      });
+
+      $("body").css({
+        "background": "black"
+      });
 
 
-// definitions needed for content change below
-
-var buttonOn = 1;
-var theJumbo = $("#theJumbo");
-var d3Container = $("#d3Stuff");
-var flyOut = $("#flyOut");
-var body1 = $("#body1");
-var body2 = $("#body2");
-theJumbo.hide();
-d3Container.hide();
-flyOut.hide();
-body2.hide();
+      d3Container.fadeIn("slow");
+      theJumbo.fadeIn("slow");
+      flyOut.fadeIn("slow");
+      buttonOn = 0;
+   }
+}
 
 //content change
-$(document).on("click", "#go", function () {
-	GoogleGeocoding();
-	
-	
-	var location = $("#locationInput")
-		.val()
-		.trim();
-// sticks button to the top and allows more clicks without
-	if (buttonOn) {
-		
-		$("#header").empty();
-		$("#content").animate({
-				top: "-=375px"
-			},
-			(duration = 500)
-		);
-
-		document.body.style.background = "";
-
-		$(".mainBody").css({
-			"height": "0",
-			"padding": "30px"
-		});
-
-		$("body").css({
-			"background": "black"
-		});
-
-
-		d3Container.fadeIn("slow");
-		theJumbo.fadeIn("slow");
-		flyOut.fadeIn("slow");
-		buttonOn = 0;
-	}
-
-
-})
+$(document).on('click','button', function () {
+    var location = $("#locationInput").val().trim();
+    if($(this).attr('id') === 'geoLoco'){
+      getLocation();
+    } else if($(this).attr('id') === 'go'){
+      if(location !== ''){
+        GoogleGeocoding();
+        loadDataInfo();
+      }
+    }
+});
