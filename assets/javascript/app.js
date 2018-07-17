@@ -313,8 +313,10 @@ $(document).on("click", "button", function() {
     starObj = [];
     planetObj = [];
     $("#d3Box").empty();
+    $("#locationInput").val("You are using your location - please approve permission and sit tight.");
     getLocation();
   } else if ($(this).attr("id") === "go") {
+    event.preventDefault();
     if (location !== "") {
       wikiData = [];
       skyObj = [];
