@@ -303,6 +303,7 @@ function loadDataInfo() {
 
 //content change
 $(document).on("click", "button", function() {
+  $('.alert').hide();
   var location = $("#locationInput")
     .val()
     .trim();
