@@ -1,3 +1,4 @@
+var starts = [];
 function SetStars(arr) {
   var w = 960,
     h = 500;
@@ -9,13 +10,14 @@ function SetStars(arr) {
     .append("svg:svg")
     .attr("width", "100%")
     .attr("height", "100%");
-  vis
-    .append("rect")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "black");
 
-  var stars = arr;
+  // vis
+  //   .append("rect")
+  //   .attr("width", "100%")
+  //   .attr("height", "100%")
+  //   .attr("fill", "black");
+
+  stars = arr;
 
   var nodes = [];
   var labelAnchors = [];
@@ -53,7 +55,7 @@ function SetStars(arr) {
 
   var force = d3.layout
     .force()
-    .size([w, h])
+    .size([w / 1.3, h])
     .nodes(nodes)
     .links(links)
     .gravity(1)
@@ -74,7 +76,7 @@ function SetStars(arr) {
     .nodes(labelAnchors)
     .links(labelAnchorLinks)
     .gravity(0)
-    .linkDistance(50)
+    .linkDistance(30)
     .linkStrength(8)
     .charge(-100)
     .size([w, h]);
@@ -190,12 +192,53 @@ function SetStars(arr) {
     link.call(updateLink);
     anchorLink.call(updateLink);
   });
-
-  $(".node").on("click", function() {
-    var star = stars[$(this).data("attribute")];
-
-    console.log("Star Name: " + star.name);
-    console.log("Star Image: " + star.image);
-    console.log("Star Description: " + star.blurb);
-  });
 }
+
+$(document).on("click", ".node", function() {
+  var star = stars[$(this).data("attribute")];
+
+  console.log("Star Name: " + star.name);
+  console.log("Star Image: " + star.image);
+  console.log("Star Description: " + star.blurb);
+
+  if (star.blurb == "") {
+    $(".card-img-top").attr(
+      "src",
+      "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg"
+    );
+    $(".card-title").empty();
+    $(".card-title").append("No Wikipedia Info");
+    $(".searchmatch").empty();
+    $(".searchmatch").append(
+      "There is no page available for this celestial body under the specified name. Maybe you should make one!"
+    );
+  } else if (star.blurb.includes("commonly refers to")) {
+    $(".card-img-top").attr(
+      "src",
+      "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg"
+    );
+    $(".card-title").empty();
+    $(".card-title").append("Many Occurences");
+    $(".searchmatch").empty();
+    $(".searchmatch").append(
+      "This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more."
+    );
+  } else if (star.blurb.includes("refer to")) {
+    $(".card-img-top").attr(
+      "src",
+      "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg"
+    );
+    $(".card-title").empty();
+    $(".card-title").append("Many Occurences");
+    $(".searchmatch").empty();
+    $(".searchmatch").append(
+      "This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more."
+    );
+  } else {
+    $(".card-img-top").attr("src", star.image);
+    $(".card-title").empty();
+    $(".card-title").append(star.name);
+    $(".searchmatch").empty();
+    $(".searchmatch").append(star.blurb);
+  }
+});
