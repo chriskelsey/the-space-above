@@ -252,17 +252,10 @@ function getStarTable(obj) {
 }
 
 
-// $(document).on('click', '.test', function (e) {
-// 	$('#flyOut').offset({top: e.pageY + 50, left: e.pageX}).fadeIn();
-// });
 
-// $(document).ready(function() {
-// 	$('.test').on('click', function (e) {
-// 		$('#flyOut').offset({top: e.pageY + 50, left: e.pageX}).fadeIn();
-// 	});
-// });
+// definitions needed for content change below
 
-
+var buttonOn = 1;
 var theJumbo = $("#theJumbo");
 var d3Container = $("#d3Stuff");
 var flyOut = $("#flyOut");
@@ -274,31 +267,40 @@ flyOut.hide();
 body2.hide();
 
 //content change
-$(document).on("click", "#go", function() {
-  GoogleGeocoding();
-
-  var location = $("#locationInput")
-    .val()
-    .trim();
-
-  $("#header").empty();
-  $("#content").animate(
-    {
-      top: "-=375px"
-    },
-    (duration = 500)
-  );
-
-  document.body.style.background = "";
-
-  $(".mainBody").css({"height": "0", "padding" : "30px"});
+$(document).on("click", "#go", function () {
+	GoogleGeocoding();
 	
-	$("body").css({"background": "black"});
-	//$("#container1").empty();
 	
-	d3Container.fadeIn("slow");
-	theJumbo.fadeIn("slow");
-	flyOut.fadeIn("slow");
+	var location = $("#locationInput")
+		.val()
+		.trim();
+// sticks button to the top and allows more clicks without
+	if (buttonOn) {
+		
+		$("#header").empty();
+		$("#content").animate({
+				top: "-=375px"
+			},
+			(duration = 500)
+		);
 
-	
+		document.body.style.background = "";
+
+		$(".mainBody").css({
+			"height": "0",
+			"padding": "30px"
+		});
+
+		$("body").css({
+			"background": "black"
+		});
+
+
+		d3Container.fadeIn("slow");
+		theJumbo.fadeIn("slow");
+		flyOut.fadeIn("slow");
+		buttonOn = 0;
+	}
+
+
 })
