@@ -150,11 +150,12 @@ function GoogleGeocoding() {
 			var long = location.lng;
 			
 			getStars(lat,long);
+      loadDataInfo();
 
 		} else {
 			// Errors to be returned to client side if query doesn't return results.
-			console.log(address + ' is not a valid location');
-			console.log("Please enter a valid location in '123 Main Street, SomeState, USA' or 'City, SomeState' format.");
+
+      $('#container1').prepend('<div class="alert alert-danger" role="alert">'+ address + ' is not a valid location<br>Please enter a valid location in \'123 Main Street, SomeState, USA\' or \'City, SomeState\' format.</div>');
 
 			// Do Something With Errors Here
 		}		
@@ -296,7 +297,8 @@ $(document).on('click','button', function () {
     } else if($(this).attr('id') === 'go'){
       if(location !== ''){
         GoogleGeocoding();
-        loadDataInfo();
+      }else{
+        $('#container1').prepend('<div class="alert alert-danger" role="alert">Please enter in an address.</div>');
       }
     }
 });

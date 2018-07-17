@@ -59,3 +59,8 @@ form {
 /* #content2 {
   margin-top: 50px;
 } */
+
+.alert {
+  margin-bottom: 0;
+  top: 2em;
+}
