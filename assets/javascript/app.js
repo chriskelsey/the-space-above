@@ -281,7 +281,6 @@ function loadDataInfo(){
         "background": "black"
       });
 
-
       d3Container.fadeIn("slow");
       theJumbo.fadeIn("slow");
       flyOut.fadeIn("slow");
@@ -292,6 +291,7 @@ function loadDataInfo(){
 //content change
 $(document).on('click','button', function () {
     var location = $("#locationInput").val().trim();
+    $('.alert').hide();
     if($(this).attr('id') === 'geoLoco'){
       getLocation();
     } else if($(this).attr('id') === 'go'){
