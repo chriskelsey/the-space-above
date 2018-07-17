@@ -115,53 +115,59 @@ function getPlanets(lat, long) {
     getStarTable(skyObj);
     loadDataInfo();
   });
-
 }
 
 function getLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
+    showPosition(navigator.geolocation.getCurrentPosition(showPosition));
   } else {
     alert("Geolocation is not supported by this browser");
   }
 }
 
-function showPosition(position){
-	var latitude = position.coords.latitude;
-	var longitude = position.coords.longitude;
+function showPosition(position) {
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
 
-	getStars(latitude,longitude);
+  getStars(latitude, longitude);
 }
 
 function GoogleGeocoding() {
-	var address = $('#locationInput').val().trim();
-	var apiKey = 'AIzaSyCeliRmHt2owSqzkOW55Jhoifz3B-YCuUU';
-	var queryUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + 'key=' + apiKey;
+  var address = $("#locationInput")
+    .val()
+    .trim();
+  var apiKey = "AIzaSyCeliRmHt2owSqzkOW55Jhoifz3B-YCuUU";
+  var queryUrl =
+    "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+    address +
+    "key=" +
+    apiKey;
 
-	$.ajax({
-		url: queryUrl,
-		method:'GET'
-	}).then(function(response){
+  $.ajax({
+    url: queryUrl,
+    method: "GET"
+  }).then(function(response) {
+    var status = response.status;
+    if (status === "OK") {
+      var location = response.results[0].geometry.location;
+      var lat = location.lat;
+      var long = location.lng;
 
-		var status = response.status;
-		if(status === 'OK'){
-			var location = response.results[0].geometry.location;
-			var lat = location.lat;
-			var long = location.lng;
-			
-			getStars(lat,long);
+      getStars(lat, long);
       loadDataInfo();
+    } else {
+      // Errors to be returned to client side if query doesn't return results.
 
-		} else {
-			// Errors to be returned to client side if query doesn't return results.
+      $("#container1").prepend(
+        '<div class="alert alert-danger" role="alert">' +
+          address +
+          " is not a valid location<br>Please enter a valid location in '123 Main Street, SomeState, USA' or 'City, SomeState' format.</div>"
+      );
 
-      $('#container1').prepend('<div class="alert alert-danger" role="alert">'+ address + ' is not a valid location<br>Please enter a valid location in \'123 Main Street, SomeState, USA\' or \'City, SomeState\' format.</div>');
-
-			// Do Something With Errors Here
-		}		
-	});
+      // Do Something With Errors Here
+    }
+  });
 }
-
 
 function getWiki(subject) {
   var wiki = {
@@ -183,7 +189,6 @@ function getWiki(subject) {
     }).then(function(response) {
       $.each(response.query.pages, function(index, value) {
         wiki.image = value.thumbnail.source;
-        $(".card-img-top").attr("src", wiki.image);
       });
     });
   }
@@ -201,30 +206,7 @@ function getWiki(subject) {
     }).then(function(response) {
       $.each(response.query.pages, function(index, value) {
         wiki.blurb = value.extract;
-        $(".card-title").empty();
-        $(".card-title").append(subject);
-        $(".searchmatch").empty();
-        $(".searchmatch").append(wiki.blurb);
       });
-      	if (wiki.blurb == "" ) {
-				$(".card-img-top").attr("src", "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg");
-				$(".card-title").empty();
-				$(".card-title").append("No Wikipedia Info");
-				$(".searchmatch").empty();
-				$(".searchmatch").append("There is no page available for this celestial body under the specified name. Maybe you should make one!");
-			  }  else if ((wiki.blurb).includes("commonly refers to")) {
-				$(".card-img-top").attr("src", "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg");
-				$(".card-title").empty();
-				$(".card-title").append("Many Occurences");
-				$(".searchmatch").empty();
-				$(".searchmatch").append("This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more.");
-			  } else if ((wiki.blurb).includes("refer to")) {
-				$(".card-img-top").attr("src", "https://www.spaceanswers.com/wp-content/uploads/2012/11/Astronaut-temp-Moon.jpg");
-				$(".card-title").empty();
-				$(".card-title").append("Many Occurences");
-				$(".searchmatch").empty();
-				$(".searchmatch").append("This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more.");
-			  }
     });
   }
 
@@ -248,57 +230,101 @@ $(document).on("click", ".test", function() {
 });
 
 function getStarTable(obj) {
-	var htm = '<table class="table table-hover col-md-12" id="techTable">';
-  	htm+= '<tr><th>Name</th><th>Constellation [Abbr.]</th><th>Distance [AU]</th><th>Right Ascension</th><th>Declination</th><th>Magnitude</th><th>Mass [<sup>*7</sup>]</th>';
-  	htm+= "<th>Radial Velocity</th><th>Radius [<sup>*7</sup>]</th><th>Spectral Type</th><th>Temperature [K]</th></tr>";
-  	obj.forEach(function(arr) {
-  		console.log(arr.value);
-  		if(arr.value == 'undefined'){console.log(arr.value)};
-    	htm+= "<tr><td>"+arr['name']+"</td><td>"+arr['con']+"</td><td>"+(arr['dist']) + "</td><td>";
-    	htm+= arr['ra']+"</td><td>"+arr['de']+"</td><td>"+arr['mag']+"</td><td>"+arr['mass']+"</td>";
-    	htm+= "<td>"+arr['rad']+"</td><td>"+arr['radius']+"</td><td>"+arr['spk']+"</td><td>"+arr['teff']+"</td></tr>";
-	});
-    htm+= "</table>";
-    $('#dynamicTable').html(htm);
+  var htm = '<table class="table table-hover col-md-12" id="techTable">';
+  htm +=
+    "<tr><th>Name</th><th>Constellation [Abbr.]</th><th>Distance [AU]</th><th>Right Ascension</th><th>Declination</th><th>Magnitude</th><th>Mass [<sup>*7</sup>]</th>";
+  htm +=
+    "<th>Radial Velocity</th><th>Radius [<sup>*7</sup>]</th><th>Spectral Type</th><th>Temperature [K]</th></tr>";
+  obj.forEach(function(arr) {
+    console.log(arr.value);
+    if (arr.value == "undefined") {
+      console.log(arr.value);
+    }
+    htm +=
+      "<tr><td>" +
+      arr["name"] +
+      "</td><td>" +
+      arr["con"] +
+      "</td><td>" +
+      arr["dist"] +
+      "</td><td>";
+    htm +=
+      arr["ra"] +
+      "</td><td>" +
+      arr["de"] +
+      "</td><td>" +
+      arr["mag"] +
+      "</td><td>" +
+      arr["mass"] +
+      "</td>";
+    htm +=
+      "<td>" +
+      arr["rad"] +
+      "</td><td>" +
+      arr["radius"] +
+      "</td><td>" +
+      arr["spk"] +
+      "</td><td>" +
+      arr["teff"] +
+      "</td></tr>";
+  });
+  htm += "</table>";
+  $("#dynamicTable").html(htm);
 }
 
-function loadDataInfo(){
-  if (buttonOn) { 
-      $("#header").empty();
+function loadDataInfo() {
+  if (buttonOn) {
+    $("#header").empty();
 
-      $("#content").animate({
+    $("#content").animate(
+      {
         top: "-=375px"
-      },(duration = 500));
+      },
+      (duration = 500)
+    );
 
-      document.body.style.background = "";
+    document.body.style.background = "";
 
-      $(".mainBody").css({
-        "height": "0",
-        "padding": "30px"
-      });
+    $(".mainBody").css({
+      height: "0",
+      padding: "30px"
+    });
 
-      $("body").css({
-        "background": "black"
-      });
+    $("body").css({
+      background: "black"
+    });
 
-
-      d3Container.fadeIn("slow");
-      theJumbo.fadeIn("slow");
-      flyOut.fadeIn("slow");
-      buttonOn = 0;
-   }
+    d3Container.fadeIn("slow");
+    theJumbo.fadeIn("slow");
+    flyOut.fadeIn("slow");
+    buttonOn = 0;
+  }
 }
 
 //content change
-$(document).on('click','button', function () {
-    var location = $("#locationInput").val().trim();
-    if($(this).attr('id') === 'geoLoco'){
-      getLocation();
-    } else if($(this).attr('id') === 'go'){
-      if(location !== ''){
-        GoogleGeocoding();
-      }else{
-        $('#container1').prepend('<div class="alert alert-danger" role="alert">Please enter in an address.</div>');
-      }
+$(document).on("click", "button", function() {
+  var location = $("#locationInput")
+    .val()
+    .trim();
+  if ($(this).attr("id") === "geoLoco") {
+    wikiData = [];
+    skyObj = [];
+    starObj = [];
+    planetObj = [];
+    $("#d3Box").empty();
+    getLocation();
+  } else if ($(this).attr("id") === "go") {
+    if (location !== "") {
+      wikiData = [];
+      skyObj = [];
+      starObj = [];
+      planetObj = [];
+      $("#d3Box").empty();
+      GoogleGeocoding();
+    } else {
+      $("#container1").prepend(
+        '<div class="alert alert-danger" role="alert">Please enter in an address.</div>'
+      );
     }
+  }
 });
