@@ -26,7 +26,7 @@
                     <br>
                     <div id="content" class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <button id="curLocation" type="button" class="btn btn-primary" id="geoLoco" onclick="getLocation()">Use My Location</button>
+                            <button type="button" class="btn btn-primary" id="geoLoco">Use My Location</button>
                         </div>
                         <input id="locationInput" type="text" class="form-control" placeholder=" or enter an address ie.123 Main Street, SomeState, USA"
                             aria-label="ie.123 Main Street, SomeState, USA" aria-describedby="location">
@@ -47,13 +47,6 @@
         <div class="placeholderLg" id="d3Stuff">
             <div class = "row">
             <div class="placeholder col-lg-7 mt-5 offset-lg-1" style="background-color: white">
-                <p>this is where the D3 stuff goes</p>
-                <!-- <button class="test" data-name="taco">Click me</button>
-                <button class="test" data-name="pizza">Click me 2</button>
-                <button class="test" data-name="star">Click me 2</button>
-                <button class="test" data-name="mercury">Click me 2</button>
-                <button class="test" data-name="venus">Click me 2</button>
-                <button class="test" data-name="orion (constellation)">Click me 2</button> -->
             </div>
 
             <div class = "col-md-3 mt-5">
@@ -95,14 +88,20 @@
             </div>
         </div>
 
-    <script src="assets/javascript/app.js"></script>
+    <!-- All Scripts -->
+    <!-- D3 Scripts -->
     <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?2.6.0"></script>
     <script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js?2.6.0"></script>
     <script type="text/javascript" src="http://mbostock.github.com/d3/d3.geom.js?2.6.0"></script>
     <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Bootstrap Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <!-- Local Scripts -->
     <script src="assets/javascript/starsMap.js"></script>
+    <script src="assets/javascript/app.js"></script>
 
 </body>
 
