@@ -221,7 +221,7 @@ $(document).on("click", ".node", function() {
     $(".card-title").append("Many Occurences");
     $(".searchmatch").empty();
     $(".searchmatch").append(
-      "This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more."
+      "This name references many Wikipedia pages. Please visit the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more."
     );
   } else if (star.blurb.includes("refer to")) {
     $(".card-img-top").attr(
@@ -232,7 +232,7 @@ $(document).on("click", ".node", function() {
     $(".card-title").append("Many Occurences");
     $(".searchmatch").empty();
     $(".searchmatch").append(
-      "This name references many Wikipedia pages. Please visit  the <a href= 'www.wikipedia.com'>Wikipedia</a> website to learn more."
+      "This name references many Wikipedia pages. Please visit the ('<a href= www.wikipedia.com>Wikipedia</a>') website to learn more."
     );
   } else {
     $(".card-img-top").attr("src", star.image);

@@ -311,8 +311,9 @@ $(document).on("click", "button", function() {
     wikiData = [];
     skyObj = [];
     starObj = [];
-    planetObj = [];
+    planetObj = [];   
     $("#d3Box").empty();
+    $("#locationInput").val("You are using your location");
     getLocation();
   } else if ($(this).attr("id") === "go") {
     if (location !== "") {
