@@ -197,10 +197,6 @@ function SetStars(arr) {
 $(document).on("click", ".node", function() {
   var star = stars[$(this).data("attribute")];
 
-  console.log("Star Name: " + star.name);
-  console.log("Star Image: " + star.image);
-  console.log("Star Description: " + star.blurb);
-
   if (star.blurb == "") {
     $(".card-img-top").attr(
       "src",
