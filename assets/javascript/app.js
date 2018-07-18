@@ -122,15 +122,18 @@ function getLocation() {
     showPosition(navigator.geolocation.getCurrentPosition(showPosition));
   } else {
     $("#container1").prepend(
-      '<div class="alert alert-danger" role="alert">Please enter in an address.</div>');
+      '<div class="alert alert-danger" role="alert">Please enter in an address.</div>'
+    );
   }
 }
 
 function showPosition(position) {
-  var latitude = position.coords.latitude;
-  var longitude = position.coords.longitude;
-
-  getStars(latitude, longitude);
+  if (position === undefined) {
+  } else {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    getStars(latitude, longitude);
+  }
 }
 
 function GoogleGeocoding() {
@@ -237,9 +240,8 @@ function getStarTable(obj) {
   htm +=
     "<th>Radial Velocity</th><th>Radius [<sup>*7</sup>]</th><th>Spectral Type</th><th>Temperature [K]</th></tr>";
   obj.forEach(function(arr) {
-    console.log(arr.value);
     if (arr.value == "undefined") {
-      console.log(arr.value);
+      console.log("Array is Undefined: " + arr.value);
     }
     htm +=
       "<tr><td>" +
@@ -304,7 +306,7 @@ function loadDataInfo() {
 
 //content change
 $(document).on("click", "button", function() {
-  $('.alert').hide();
+  $(".alert").hide();
   var location = $("#locationInput")
     .val()
     .trim();
